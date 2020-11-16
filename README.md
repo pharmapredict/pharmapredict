@@ -8,7 +8,7 @@
 
 **INN**: Introduction. International Nonproprietary Names (INN) identify pharmaceutical substances or active pharmaceutical ingredients. Each INN is a unique name that is globally recognized and is public property. A nonproprietary name is also known as a generic name. (definition by WHO)
 
-**Authorisation** status: 0: drug has been accepted by EMA. 1: refused by EMA
+**Authorisation status**: 0: drug has been accepted by EMA. 1: refused by EMA
 
 **Generic**: 0: no 1: yes
 
