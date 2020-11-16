@@ -1,5 +1,17 @@
 # pharmapredict
 ## Data
+### Sources
+[EMA](https://www.ema.europa.eu/en/medicines/download-medicine-data)
+
+[PubMed](https://pubmed.ncbi.nlm.nih.gov/)
+
+[ClinicalTrials.gov](https://clinicaltrials.gov/)
+
+### Construction of dataset
+From the EMA Excel sheet (see above), colulmns 'Medicine name', 'Therapeutic area', 'INN', 'Authorisation status', 'Generic, 'Biosimilar', 'Orphan medicine' and 'First published' were selected. The file was filtered to only show entries with Authorisation status 'refused' or 'authorised'.
+Entries in 'Therapeutic area' were manually transformed to represent multiple therapeutic areas separated by comma.
+For each row, searches in the PubMed and ClinicalTrials API were conducted using the following formula: (therapeutic_area_1 OR therapeutic_area_2 etc) AND (INN) AND (date < 'First published'). From these search queries, the remaining columns were filled.
+
 
 ### Description of columns
 **Medicine name**: Brand name of the drug
