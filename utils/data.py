@@ -15,7 +15,7 @@ PREDICTIVE_FEATURES=['org_industry',
 
 
 def get_data(drop_8000=True):
-    df = pd.read_csv('../raw_data/wra_CT_PM_conclusions.csv')
+    df = pd.read_csv('raw_data/wra_CT_PM_conclusions.csv')
     df.drop(columns='Unnamed: 0', inplace=True)
     if drop_8000:
         df = df[df['n_trials'] < 8000]
@@ -27,7 +27,7 @@ def get_data(drop_8000=True):
 
 # get numericals...and feature engineering
 
-def get_numericals():
+def get_numericals(df):
     df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
     df = df.select_dtypes(exclude='object')
     return df
