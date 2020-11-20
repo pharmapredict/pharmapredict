@@ -20,6 +20,7 @@ def get_data(drop_8000=True):
     if drop_8000:
         df = df[df['n_trials'] < 8000]
     df.conclusions.fillna('',inplace=True)
+    df = df.reset_index(drop=True)
     #df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
     return df
 
