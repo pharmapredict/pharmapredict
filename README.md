@@ -1,4 +1,6 @@
 # pharmapredict
+Based on historical data of authorised, refused and withdrawn drug/indication pairs we aim at predicting market authorisation of new candidates.
+
 ## Data
 ### Sources
 [EMA](https://www.ema.europa.eu/en/medicines/download-medicine-data)
