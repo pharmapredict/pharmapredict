@@ -31,7 +31,7 @@ def main():
 
     # user input
     inn = st.text_input("INN (international nonproprietary name)")
-    therap_area = st.text_input("Therapeutic area (if more than one, separate by comma")
+    therap_area = st.text_input("Therapeutic area (if more than one, separate by comma)")
     orphan = st.radio("Orphan drug", ["yes", "no"])
 
     # checking if user input is valid
