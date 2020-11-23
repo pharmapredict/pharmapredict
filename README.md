@@ -1,7 +1,7 @@
 # PharmaPredict
-Based on [historical data](https://www.ema.europa.eu/en/medicines/download-medicine-data) of authorised, refused and withdrawn drug/indication pairs we aim at predicting market authorisation of new pharmaceutical candidates. Given the simple user input of INN (international nonproprietary name), therapeutic area and [orphan medicine](https://en.wikipedia.org/wiki/Orphan_drug) status we aggregate additional features from the [ClinicalTrials.gov](https://clinicaltrials.gov/api/) and [PubMed](https://www.ncbi.nlm.nih.gov/home/develop/api/) APIs. Apart from numerical and one categorial features, we use [Tf-idf-vectoriced](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html) abstracts to train a [Random Forest Classifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html?highlight=random%20forest#sklearn.ensemble.RandomForestClassifier).
+Based on [historical data](https://www.ema.europa.eu/en/medicines/download-medicine-data) of authorised, refused and withdrawn drug/indication pairs we aim at predicting market authorisation of new pharmaceutical candidates. Given the simple user input of INN (international nonproprietary name), therapeutic area and [orphan medicine](https://en.wikipedia.org/wiki/Orphan_drug) status we aggregate additional features from the [ClinicalTrials.gov](https://clinicaltrials.gov/api/) and [PubMed](https://www.ncbi.nlm.nih.gov/home/develop/api/) APIs. Apart from numerical and one categorial features, we use [Tf-idf-vectoriced](https://scikit-learn.org/stable/modules/feature_extraction.html#tfidf-term-weighting) abstracts to train a [Random Forest Classifier](https://scikit-learn.org/stable/modules/ensemble.html#random-forests).
 
-[Live demo](https://pharmapredict.herokuapp.com/)
+▶ [Live demo](https://pharmapredict.herokuapp.com/)
 
 ![](demo.gif)
 
