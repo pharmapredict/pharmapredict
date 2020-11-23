@@ -10,4 +10,8 @@ yapf
 python-gitlab
 twine
 streamlit
-git+git@github.com:pharmapredict/pharmatools.git
+biopython==1.78
+joblib==0.14.1
+nltk==3.5
+scikit-learn==0.23.2
+-e git://github.com/pharmapredict/pharmatools.git#egg=pharmatools
