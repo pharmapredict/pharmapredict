@@ -26,35 +26,31 @@ def main():
 
     st.header("PharmaPredict")
     st.markdown("**Tell us something about your product**")
-    inn = st.text_input("INN")
+    inn = st.text_input("INN (international nonproprietary name)")
+    therap_area = st.text_input("Therapeutic area (if more than one, separate by comma")
     orphan = st.radio("Orphan drug", ["yes", "no"])
-    therap_area = st.text_input("Therapeutic area")
 
     # checking if user input is valid
     if ((inn != "") & (orphan != "") & (therap_area != "")):
         df_input = pd.DataFrame(data = [[inn, therap_area, orphan, datetime.now()]], columns=["INN", "Therapeutic area", "Orphan medicine", "First published"])
         df_input["Orphan medicine"] = df_input["Orphan medicine"].map({"no" : 0, "yes": 0})
-        st.write(df_input)
 
         df = ct_pm(df_input)
-        st.write(df)
 
         # create text features using fitted TfIdf vectorizer
         vectorized = input_to_df(df, vectorizer)
-        st.write(df)
 
         # scale
         numericals = get_numericals(df)
         columns_names = numericals.columns.to_list()
-        columns_names
         scaled_array = scaler.transform(numericals[columns_names])
         scaled_numericals = pd.DataFrame(scaled_array, columns=columns_names)
         X = scaled_numericals.join(vectorized)
-        X
+        #X
 
         # predict
-        y_pred = model.predict(X)
-        st.write(y_pred)
+        y_pred = model.predict_proba(X)        
+        st.write("The probabilty of market authorisation is: {:.0%}".format(y_pred[0][0]))
 
 
 if __name__ == "__main__":
