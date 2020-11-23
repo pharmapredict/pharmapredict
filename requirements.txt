@@ -14,4 +14,4 @@ biopython==1.78
 joblib==0.14.1
 nltk==3.5
 scikit-learn==0.23.2
-git+git@github.com:pharmapredict/pharmatools.git
+-e git://github.com/pharmapredict/pharmatools.git#egg=pharmatools
