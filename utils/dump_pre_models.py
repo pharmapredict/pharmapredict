@@ -17,7 +17,16 @@ def get_numericals(df):
     df = df.select_dtypes(exclude='object')
     return df
 
-def percentage_columns(df,column_list):
+def percentage_columns(df):
+
+    column_list= ['status_not_yet_recruiting', 'status_recruiting',
+       'status_enrolling_by_invitation', 'status_active_not_recruiting',
+       'status_suspended', 'status_terminated', 'status_completed',
+       'status_withdrawn', 'status_unknown', 'org_fed', 'org_indiv',
+       'org_industry', 'org_network', 'org_nih', 'org_other', 'org_other_gov',
+       'phase_early_1', 'phase_not_applicable', 'phase_1', 'phase_2',
+       'phase_3', 'phase_4', 'pm_results']
+
     print(df['n_trials'].head())
     for column in column_list:
         df[column]=((df[column]*100)/df['n_trials']).replace([np.inf, -np.inf, np.nan], 0)
@@ -32,13 +41,7 @@ dumped_model = '../models/random_forest_clf.joblib'
 
 numericals = get_numericals(raw_data)
 
-percent_list= ['status_not_yet_recruiting', 'status_recruiting',
-       'status_enrolling_by_invitation', 'status_active_not_recruiting',
-       'status_suspended', 'status_terminated', 'status_completed',
-       'status_withdrawn', 'status_unknown', 'org_fed', 'org_indiv',
-       'org_industry', 'org_network', 'org_nih', 'org_other', 'org_other_gov',
-       'phase_early_1', 'phase_not_applicable', 'phase_1', 'phase_2',
-       'phase_3', 'phase_4', 'pm_results']
+
 
 numericals = numericals.drop(labels=['Unnamed: 0', 'Authorisation status'], axis=1)
 

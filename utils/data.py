@@ -2,7 +2,6 @@
 # a generic method for installing the data
 import pandas as pd
 import numpy as np
-from somewhere import vectorizer
 from datetime import datetime
 
 
@@ -62,10 +61,11 @@ def percentage_columns(df, trial_columns):
 def input_to_df(df, vectorizer):
     numerical = get_numericals(df)
     text = df['conclusions']
-    vectors = vectorizer.transform(text).toarray()
-    cols = [i for i in range(len(vectors[1]))]
-    vector_df = pd.DataFrame(vectors, columns=cols)
-    df = pd.concat([numerical,vector_df],axis=1)
+    vectors = vectorizer.transform(text)
+    vectorized = pd.DataFrame(vectors.toarray(),columns = vectorizer.get_feature_names())
+    #cols = [i for i in range(len(vectors[1]))]
+    #vector_df = pd.DataFrame(vectors, columns=cols)
+    df = pd.concat([numerical,vectorized],axis=1)
     return df
 
 
