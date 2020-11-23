@@ -1,6 +1,8 @@
 # get data functions
 # a generic method for installing the data
 import pandas as pd
+from datetime import datetime
+
 
 PREDICTIVE_FEATURES=['org_industry',
  'n_trials',
@@ -13,6 +15,14 @@ PREDICTIVE_FEATURES=['org_industry',
  'status_not_yet_recruiting',
  'phase_2']
 
+def user_inputs():
+
+    df_inputs= pd.DataFrame()
+
+    df_inputs['INN']= input('Please input the Active Ingredients (INN) of your drug:')
+    df_inputs['Therapeutic area']= input('Please input the Therapeutic area which you drug inted to treat:')
+    df_inputs['date']= datetime.now()
+    return df_inputs
 
 def get_data(drop_8000=True):
     df = pd.read_csv('raw_data/wra_CT_PM_conclusions.csv')
