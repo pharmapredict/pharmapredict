@@ -39,7 +39,7 @@ def get_data(drop_8000=True):
 
 def get_numericals(df):
     df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
-    df = df.select_dtypes(exclude='object')
+    df = df.select_dtypes(exclude='object').drop(columns=["First published"])
     return df
 
 # trial_columns
@@ -59,14 +59,14 @@ def percentage_columns(df, trial_columns):
 # vectorizer from somewhere
 
 def input_to_df(df, vectorizer):
-    numerical = get_numericals(df)
+    #numerical = get_numericals(df)
     text = df['conclusions']
     vectors = vectorizer.transform(text)
     vectorized = pd.DataFrame(vectors.toarray(),columns = vectorizer.get_feature_names())
     #cols = [i for i in range(len(vectors[1]))]
     #vector_df = pd.DataFrame(vectors, columns=cols)
-    df = pd.concat([numerical,vectorized],axis=1)
-    return df
+    #df = pd.concat([numerical,vectorized],axis=1)
+    return vectorized
 
 
 
