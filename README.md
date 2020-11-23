@@ -1,5 +1,5 @@
-# pharmapredict
-Based on historical data of authorised, refused and withdrawn drug/indication pairs we aim at predicting market authorisation of new candidates.
+# PharmaPredict
+Based on historical data of authorised, refused and withdrawn drug/indication pairs we aim at predicting market authorisation of new pharmaceutical candidates. Given the simple user input of INN (international nonproprietary name), therapeutic area and orphan medicine status we aggregate additional features from the ClinicalTrials.gov and PubMed APIs. Apart from numerical and one categorial features, we use Tf-idf-vectoriced abstracts to train a Random Forest Classifier.
 
 ## Data
 ### Sources
