@@ -1,17 +1,8 @@
 # get data functions
 # a generic method for installing the data
 import pandas as pd
-
-PREDICTIVE_FEATURES=['org_industry',
- 'n_trials',
- 'phase_4',
- 'org_other',
- 'status_completed',
- 'status_recruiting',
- 'phase_3',
- 'pm_results',
- 'status_not_yet_recruiting',
- 'phase_2']
+import numpy as np
+from somewhere import vectorizer
 
 
 def get_data(drop_8000=True):
@@ -24,8 +15,6 @@ def get_data(drop_8000=True):
     #df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
     return df
 
-# possibly include the feature list here as well - see above
-
 # get numericals...and feature engineering
 
 def get_numericals(df):
@@ -33,9 +22,8 @@ def get_numericals(df):
     df = df.select_dtypes(exclude='object')
     return df
 
-# trial columns as a percent of n_trials
-
-TRIAL_COLUMNS=['status_not_yet_recruiting', 'status_recruiting',
+# trial_columns
+trial_columns=['status_not_yet_recruiting', 'status_recruiting',
        'status_enrolling_by_invitation', 'status_active_not_recruiting',
        'status_suspended', 'status_terminated', 'status_completed',
        'status_withdrawn', 'status_unknown', 'org_fed', 'org_indiv',
@@ -43,7 +31,22 @@ TRIAL_COLUMNS=['status_not_yet_recruiting', 'status_recruiting',
        'phase_early_1', 'phase_not_applicable', 'phase_1', 'phase_2',
        'phase_3', 'phase_4']
 
-def percentage_columns(x, trial_columns):
+def percentage_columns(df, trial_columns):
     for column in trial_columns:
         df[column]=((df[column])/df['n_trials']).replace([np.inf, -np.inf, np.nan], 0)
     return df
+
+# vectorizer from somewhere
+
+def input_to_df(df, vectorizer):
+    numerical = get_numericals(df)
+    text = df['conclusions']
+    vectors = vectorizer.transform(text).toarray()
+    cols = [i for i in range(len(vectors[1]))]
+    vector_df = pd.DataFrame(vectors, columns=cols)
+    df = pd.concat([numerical,vector_df],axis=1)
+    return df
+
+
+
+
