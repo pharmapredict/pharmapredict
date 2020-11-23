@@ -10,4 +10,4 @@ yapf
 python-gitlab
 twine
 streamlit
-git+git@github.com:pharmapredict/pharmatools.git
+-e git://github.com/pharmapredict/pharmatools.git
