@@ -30,8 +30,8 @@ def main():
     st.markdown("**Tell us something about your product**")
 
     # user input
-    inn = st.text_input("INN (international nonproprietary name)")
-    therap_area = st.text_input("Therapeutic area (if more than one, separate by comma)")
+    inn = st.text_input("INN (international nonproprietary name)").replace("[", "").replace("]", "")
+    therap_area = st.text_input("Therapeutic area (if more than one, separate by comma)").replace("[", "").replace("]", "")
     orphan = st.radio("Orphan drug", ["yes", "no"])
 
     st.markdown("**Gathering additional data**")
