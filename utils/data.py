@@ -37,6 +37,10 @@ def get_data(drop_8000=True):
 
 # get numericals...and feature engineering
 
+def get_thera_number_column(df):
+    df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
+    return df
+
 def get_numericals(df):
     df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
     df = df.select_dtypes(exclude='object').drop(columns=["First published"])
@@ -68,6 +72,15 @@ def input_to_df(df, vectorizer):
     #df = pd.concat([numerical,vectorized],axis=1)
     return vectorized
 
-
+def get_select_data(drop_8000=True):
+    df = pd.read_csv('../raw_data/wra_CT_PM_conclusions.csv')
+    df.drop(columns='Unnamed: 0', inplace=True)
+    if drop_8000:
+        df = df[df['n_trials'] < 8000]
+    df.conclusions.fillna('',inplace=True)
+    df = df.reset_index(drop=True)
+    df['therapeutic_number'] = df['Therapeutic area'].apply(lambda x: x.count(',') + 1)
+    df = df.drop(columns=['Medicine name','Therapeutic area','INN','First published'])
+    return df
 
 
