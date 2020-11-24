@@ -98,7 +98,7 @@ def trial_data(df):
             df["phase_3"][index] = data["phases"]["Phase 3"]
             df["phase_4"][index] = data["phases"]["Phase 4"]
         except:
-            raise f"fetching trial data for {index} not successful"
+            raise Exception("fetching trial data not successful")
 
     return df
 
