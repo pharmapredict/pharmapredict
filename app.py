@@ -3,7 +3,7 @@ Streamlit app
 """
 import pandas as pd
 import streamlit as st
-from utils.clinical_trials_pubmed import ct_pm
+from utils.clinical_trials_pubmed import ct_pm, trial_data, pubmed_conclusions
 from utils.data import input_to_df
 from utils.data import get_numericals
 from joblib import load
@@ -34,8 +34,17 @@ def main():
     therap_area = st.text_input("Therapeutic area (if more than one, separate by comma")
     orphan = st.radio("Orphan drug", ["yes", "no"])
 
+    st.markdown("**Gathering additional data**")
+    trials_progress = st.markdown("🕒 Trial data from ClinicalTrials.gov")
+    pubmed_progress = st.markdown("🕒 Abstracts from PubMed")
+
+    st.markdown("**Prediction**")
+    prediction_placeholder = st.markdown("🕒 Waiting for you input")
+
     # checking if user input is valid
     if (inn != "") & (orphan != "") & (therap_area != ""):
+
+        prediction_placeholder.markdown("🕒 Waiting for additional data")
 
         # turn user input into dataframe
         df_input = pd.DataFrame(
@@ -49,7 +58,13 @@ def main():
         )
 
         # get clinical trials and pubmed columns
-        df_ct_pm = ct_pm(df_input)
+        #df_ct_pm = ct_pm(df_input)
+        trials_progress.markdown("👉 Trial data from ClinicalTrials.gov")
+        df_ct = trial_data(df_input)
+        trials_progress.markdown("✔ Trial data from ClinicalTrials.gov")
+        pubmed_progress.markdown("👉 Abstracts from PubMed")
+        df_ct_pm = pubmed_conclusions(df_ct)
+        pubmed_progress.markdown("✔ Abstracts from PubMed")
 
         # create text features using fitted TfIdf vectorizer
         vectorized = input_to_df(df_ct_pm, vectorizer)
@@ -62,10 +77,12 @@ def main():
         X = scaled_numericals.join(vectorized)
 
         # predict
+        prediction_placeholder.empty()
         y_pred = model.predict_proba(X)
         st.write(
             "The probabilty of market authorisation is: {:.0%}".format(y_pred[0][0])
         )
+        
 
 
 if __name__ == "__main__":
