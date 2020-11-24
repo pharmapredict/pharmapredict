@@ -39,7 +39,7 @@ def main():
     pubmed_progress = st.markdown("🕒 Abstracts from PubMed")
 
     st.markdown("**Prediction**")
-    prediction_placeholder = st.markdown("🕒 Waiting for you input")
+    prediction_placeholder = st.markdown("🕒 Waiting for your input")
 
     # checking if user input is valid
     if (inn != "") & (orphan != "") & (therap_area != ""):
@@ -80,7 +80,7 @@ def main():
         prediction_placeholder.empty()
         y_pred = model.predict_proba(X)
         st.write(
-            "The probabilty of market authorisation is: {:.0%}".format(y_pred[0][0])
+            "The probabilty of market authorisation is **{:.0%}**.".format(y_pred[0][0])
         )
         
 
