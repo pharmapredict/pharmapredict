@@ -1,4 +1,5 @@
 import pandas as pd
+import time
 from pharmatools.clinical_trials import get_trial_data
 from pharmatools.pubmed import get_pubmed_ids, get_titles_abstracts_batch
 from nltk.tokenize import sent_tokenize
@@ -59,46 +60,51 @@ def trial_data(df):
         print(f'fetching trial data for {index}, {row["INN"]}')
 
         # call ClinicalTrials API
-        try:
-            data = get_trial_data(
-                row["INN"], row["Therapeutic area"], row["First published"]
-            )
+        attempts = 0
+        while attempts < 3:
+            try:
+                data = get_trial_data(
+                    row["INN"], row["Therapeutic area"], row["First published"]
+                )
 
-            # update dataframe
-            df["n_trials"][index] = data["n_trials"]
+                # update dataframe
+                df["n_trials"][index] = data["n_trials"]
 
-            df["status_not_yet_recruiting"][index] = data["status"][
-                "Not yet recruiting"
-            ]
-            df["status_recruiting"][index] = data["status"]["Recruiting"]
-            df["status_enrolling_by_invitation"][index] = data["status"][
-                "Enrolling by invitation"
-            ]
-            df["status_active_not_recruiting"][index] = data["status"][
-                "Active, not recruiting"
-            ]
-            df["status_suspended"][index] = data["status"]["Suspended"]
-            df["status_terminated"][index] = data["status"]["Terminated"]
-            df["status_completed"][index] = data["status"]["Completed"]
-            df["status_withdrawn"][index] = data["status"]["Withdrawn"]
-            df["status_unknown"][index] = data["status"]["Unknown status"]
+                df["status_not_yet_recruiting"][index] = data["status"][
+                    "Not yet recruiting"
+                ]
+                df["status_recruiting"][index] = data["status"]["Recruiting"]
+                df["status_enrolling_by_invitation"][index] = data["status"][
+                    "Enrolling by invitation"
+                ]
+                df["status_active_not_recruiting"][index] = data["status"][
+                    "Active, not recruiting"
+                ]
+                df["status_suspended"][index] = data["status"]["Suspended"]
+                df["status_terminated"][index] = data["status"]["Terminated"]
+                df["status_completed"][index] = data["status"]["Completed"]
+                df["status_withdrawn"][index] = data["status"]["Withdrawn"]
+                df["status_unknown"][index] = data["status"]["Unknown status"]
 
-            df["org_fed"][index] = data["organizers"]["FED"]
-            df["org_indiv"][index] = data["organizers"]["INDIV"]
-            df["org_industry"][index] = data["organizers"]["INDUSTRY"]
-            df["org_network"][index] = data["organizers"]["NETWORK"]
-            df["org_nih"][index] = data["organizers"]["NIH"]
-            df["org_other"][index] = data["organizers"]["OTHER"]
-            df["org_other_gov"][index] = data["organizers"]["OTHER_GOV"]
+                df["org_fed"][index] = data["organizers"]["FED"]
+                df["org_indiv"][index] = data["organizers"]["INDIV"]
+                df["org_industry"][index] = data["organizers"]["INDUSTRY"]
+                df["org_network"][index] = data["organizers"]["NETWORK"]
+                df["org_nih"][index] = data["organizers"]["NIH"]
+                df["org_other"][index] = data["organizers"]["OTHER"]
+                df["org_other_gov"][index] = data["organizers"]["OTHER_GOV"]
 
-            df["phase_early_1"][index] = data["phases"]["Early Phase 1"]
-            df["phase_not_applicable"][index] = data["phases"]["Not Applicable"]
-            df["phase_1"][index] = data["phases"]["Phase 1"]
-            df["phase_2"][index] = data["phases"]["Phase 2"]
-            df["phase_3"][index] = data["phases"]["Phase 3"]
-            df["phase_4"][index] = data["phases"]["Phase 4"]
-        except:
-            raise Exception("fetching trial data not successful")
+                df["phase_early_1"][index] = data["phases"]["Early Phase 1"]
+                df["phase_not_applicable"][index] = data["phases"]["Not Applicable"]
+                df["phase_1"][index] = data["phases"]["Phase 1"]
+                df["phase_2"][index] = data["phases"]["Phase 2"]
+                df["phase_3"][index] = data["phases"]["Phase 3"]
+                df["phase_4"][index] = data["phases"]["Phase 4"]
+                break
+            except:
+                print("fetching trial data not successful")
+                time.sleep(0.5)
+                attempts += 1
 
     return df
 
