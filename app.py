@@ -16,6 +16,10 @@ from datetime import datetime
 
 def main():
 
+    st.sidebar.markdown("**ABOUT**")
+    st.sidebar.markdown("This app and the underlying model were built by a team taking part in the Le Wagon Data Science Bootcamp in Lisbon.")
+    st.sidebar.markdown("More information in our [GitHub repository](https://github.com/pharmapredict/pharmapredict#pharmapredict).")
+
     # load fitted scaler, vectorizer and model
     scaler = load("models/scaler.joblib")
     vectorizer = load("models/vectorizer.joblib")
