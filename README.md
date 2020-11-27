@@ -29,9 +29,9 @@ algorithm.
 #### Pre-processing Steps
 
 Due to the nature of the search function - namely that additional therapeutic areas increased the scope of the search parameters,
- **new feature** relating to this number was introduced. The text collected from the abstracts within *PubMed* was passed to
- the `Tf-Idf vectorizer` to select the 50 most significant words. Additionally, the numerical features were `scaled` to ensure
- that they fell between 0 and 1 to ensure consistent weighting.
+a **new feature** relating to this number was introduced. The text collected from the abstracts within *PubMed* was passed to
+the `Tf-Idf vectorizer` to select the 50 most significant words. Additionally, the numerical features were `scaled` to ensure
+that they fell between 0 and 1 to ensure consistent weighting.
 
 #### Additional Experiments
 
@@ -58,3 +58,9 @@ unbalanced data and a dataset containing both numerical and text features. The r
 the **webapp** (see above) provides a quick solution to the likelihood of drug approval. Given more time, the project would
 seek to increase the data from which to train a more effective model, either through the passage of time or with the help of
 a commercial data supplier.
+
+#### Acknowledgements
+
+With thanks to **Le Wagon Lisbon staff**, and all those that contribute to the following:
+
+`pandas`, `numpy`, `scikit-learn`, `nltk`, `streamlit`, `heroku`,`github`, `joblib` and, of course, `python`.
