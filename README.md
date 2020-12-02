@@ -57,7 +57,7 @@ the **webapp** (see above) provides a quick solution to the likelihood of drug a
 seek to increase the data from which to train a more effective model, either through the passage of time or with the help of
 a commercial data supplier.
 
-#### Acknowledgements
+### Acknowledgements
 
 With thanks to **Le Wagon Lisbon staff**, and all those that contribute to the following:
 
