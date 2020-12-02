@@ -47,7 +47,11 @@ Approaches here included:
 
 Although the `Stacking` method was marginally more predictive, the `Random Forest` performed well and was ultimately chosen
 for ease of implementation and reproducibility. The final model recorded an area under the curve score (a metric to show the
-capture of true positives) of **80%**.
+ability to differentiate the two classes) of **80%**. Also note the confusion matrix below, which demostrates the predictions of our model on the test set.
+
+![](confusion_matrix.png)
+
+*Confusion matrix (y-axis: true labels, x-axis: predicted labels)*
 
 ### Project Conclusions and Further Work
 
