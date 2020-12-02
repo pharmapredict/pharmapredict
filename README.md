@@ -51,7 +51,7 @@ ability to differentiate the two classes) of **80%**. Also note the confusion ma
 
 ![](confusion_matrix.png)
 
-*Confusion matrix (y-axis: true labels, x-axis: predicted labels)*
+*Confusion matrix*
 
 ### Project Conclusions and Further Work
 
